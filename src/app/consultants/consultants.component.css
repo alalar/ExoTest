@@ -1,0 +1,29 @@
+.mat-nav-list h2 {
+    text-align: center;
+    background-color: #3f51b5;
+    margin: 0px;
+    padding: 5px;
+    border: 3px solid #3f51b5;
+    border-bottom: 0px;
+    border-radius: 8px 8px 0px 0px;
+    color: #FFFFFF;
+}
+.mat-nav-list.userList {
+    border-bottom: 3px solid #3f51b5;
+}
+.userList .mat-list-item {
+    border-left: 3px solid #3f51b5;
+    border-right: 3px solid #3f51b5;
+}
+.userList .mat-list-item.active {
+    border: 3px solid #ff8820;
+    background-color: #3f51b5;
+    color: #FFFFFF;
+}
+
+.GreenFont {
+    color: #2bba16;
+  }
+  .RedFont {
+    color: #ed4f4f;
+  }

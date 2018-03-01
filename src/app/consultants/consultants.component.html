@@ -1,0 +1,37 @@
+<div fxLayout="row" fxLayoutAlign="start start" fxLayoutWrap>
+  <div class="consultantsListPanel" fxFlex="35%" fxFlex.lt-md="100%" [fxShow.lt-md]="!showContactInfo">
+    <div *ngIf="consultants | async; let consultants; else loadingconsultants">
+      <mat-nav-list class="userList">
+        <h2 matHeader >{{'Users'|translate}}</h2>
+        <mat-list-item *ngFor="let person of consultants" routerLink="/consultants/{{person.id}}" routerLinkActive="active" (click)="showContactInfo=true">
+          <img matListAvatar src="{{ person.profile_picture }}" alt="image">
+          <p matLine  >
+            <span>{{person.full_name}}</span>
+            <mat-icon [ngClass]="{'RedFont':person.status!='A', 'GreenFont':person.status==='A'}" aria-hidden="true" matTooltip="{{person.status | translate}}">verified_user</mat-icon>
+          </p>
+          <p matLine fxLayout="row" fxLayoutAlign="start center"><mat-icon aria-hidden="true">home</mat-icon><span>{{person.location}}</span> </p>
+          <p matLine fxLayout="row" fxLayoutAlign="start center"><mat-icon aria-hidden="true">mail</mat-icon><span>{{person.email}}</span></p>
+          <p matLine fxLayout="row" fxLayoutAlign="space-between center">
+            {{'Comments'|translate}}
+            <mat-chip-list>
+            <mat-chip>{{person.comments.length}}</mat-chip>
+            </mat-chip-list>
+          </p>
+        </mat-list-item>
+      </mat-nav-list>     
+    </div>
+    <ng-template #loadingconsultants>
+        <mat-nav-list class="userList">
+            <h2 matHeader >{{'Users'|translate}}</h2>
+            <mat-list-item>
+                <p matLine fxFill fxLayoutAlign="center center">
+                  <mat-spinner [diameter]="40"></mat-spinner>
+                  </p>
+              </mat-list-item>
+        </mat-nav-list>
+    </ng-template>
+  </div>
+  <div class="consultantInfoPanel" fxFlex="65%" fxFlex.lt-md="100%" [fxShow.lt-md]="showContactInfo" fxLayoutAlign="center start" [scrollTop]="0">
+    <router-outlet></router-outlet>
+  </div>
+</div>

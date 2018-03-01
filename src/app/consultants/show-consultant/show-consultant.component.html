@@ -1,0 +1,78 @@
+<div fxFlexFill fxLayout="column" fxLayoutGap="10px">
+  <mat-card class="mainInfo">
+     <div fxFlexFill fxHide.gt-sm="true" >
+        <button  mat-raised-button color="primary" (click)="hidePanelsService.emitChange(false)">{{'SelectOtherUser'|translate}}</button>
+    </div>
+    <div fxLayout="row"  fxLayoutAlign="start star" fxLayoutGap="10px" fxLayoutWrap>
+     
+      <div *ngIf="consultant" fxFlex.lt-md="100%" fxFlex="250px">
+        <mat-card-header >
+            
+            <mat-card-title  fxLayout="row" fxLayoutAlign="space-between center">
+              <span>
+                <img mat-card-avatar src="{{consultant.profile_picture }}" alt="image">
+                {{consultant.full_name}}
+              </span>
+              <span fxLayout="row" fxLayoutAlign="end center">
+                <i><small>{{consultant.gender | translate}}</small></i>
+                <mat-icon [ngClass]="{'RedFont':consultant.status!='A', 'GreenFont':consultant.status==='A'}" aria-hidden="true" matTooltip="{{consultant.status | translate}}">verified_user</mat-icon>
+              </span>
+            </mat-card-title>
+            <mat-card-subtitle>{{consultant.short_me}} </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+              <div>
+                  <div fxLayout="row" fxLayoutAlign="start center"><mat-icon aria-hidden="true">home</mat-icon><span>{{consultant.location}}</span></div>
+                  <div fxLayout="row" fxLayoutAlign="start center"><mat-icon aria-hidden="true">mail</mat-icon><a href="mailto:{{consultant.email}}">{{consultant.email}}</a></div>
+                  <span matTooltip="{{'Created'|translate}}" fxLayout="row" fxLayoutAlign="start center"><mat-icon color="primary" aria-hidden="true">schedule</mat-icon>{{consultant.created | date: 'dd/MM/yyyy' }}</span> 
+                  <span matTooltip="{{'Modified'|translate}}" fxLayout="row" fxLayoutAlign="start center"><mat-icon color="primary" aria-hidden="true">update</mat-icon>{{consultant.modified | date: 'dd/MM/yyyy' }}</span>
+              </div>
+        </mat-card-content>
+      </div>
+
+      <div  fxFlex fxFlex.lt-md="100%">
+        <div *ngIf="blnLocationNotFound">
+            <mat-error>{{'LocationNotFound'|translate}}</mat-error>
+        </div>
+        <div  id="googleMap" ></div>
+      </div>
+    </div>
+  </mat-card>
+  <comment-module *ngIf="consultant" consultantId="{{consultant.id}}"></comment-module>
+  <mat-list *ngIf="consultant" class="comments">
+    <mat-list-item>
+      <h3>{{'Comments'|translate}}</h3>
+    </mat-list-item>
+    <mat-list-item *ngFor="let comment of consultant.comments">
+        <p matLine fxLayout="row" fxLayoutAlign="start center"><mat-icon  color="primary" aria-hidden="true" matTooltip="{{'User' | translate}}">account_box</mat-icon><span > {{comment.user}}</span> </p>
+        <h3 matLine fxLayout="row" fxLayoutAlign="start center">
+                  <mat-icon *ngIf="comment.status!='N'" color="primary" aria-hidden="true" matTooltip="{{comment.status | translate}}">done</mat-icon>
+                  <mat-icon *ngIf="comment.status=='N'" color="primary" aria-hidden="true" matTooltip="{{comment.status | translate}}">notifications_active</mat-icon>
+                <b>{{comment.subject}}</b>
+        </h3>
+        <p matLine style="white-space:normal">{{comment.body}}</p>
+        <p matLine  >
+          <mat-icon *ngIf="comment.rating==0" aria-hidden="true" matTooltip="{{'Rating'|translate}}: 0 ">star_border</mat-icon>              
+          <mat-list *ngIf="comment.rating>0 && comment.rating<11" fxLayout="row" fxLayoutAlign="start center"  matTooltip="{{'Rating'|translate}} : {{comment.rating}}" dense> 
+              <mat-list-item  *ngFor="let numRating of transformToArray(comment.rating)">
+                  <p matLine><mat-icon color="primary" aria-hidden="true">star</mat-icon></p>
+              </mat-list-item>
+          </mat-list>
+          <span *ngIf="comment.rating>10" matTooltip="{{'Rating'|translate}} : {{comment.rating}}" fxLayout="row" fxLayoutAlign="start center">
+              <mat-icon color="primary" aria-hidden="true">star</mat-icon>
+              <mat-icon color="primary" aria-hidden="true">star</mat-icon>
+              <mat-icon color="primary" aria-hidden="true">star</mat-icon>
+              <mat-icon color="primary" aria-hidden="true">star</mat-icon>
+              <mat-icon color="primary" aria-hidden="true">star</mat-icon>
+              ....
+              <mat-icon color="primary" aria-hidden="true">star</mat-icon>
+              {{comment.rating}}
+          </span>
+        </p>
+        <p matLine fxLayout="row" fxLayoutAlign="space-between center">
+            <span matTooltip="{{'Created'|translate}}" fxLayout="row" fxLayoutAlign="start center"><mat-icon color="primary" aria-hidden="true">schedule</mat-icon>{{comment.created | date: 'dd/MM/yyyy' }}</span> 
+            <span matTooltip="{{'Modified'|translate}}" fxLayout="row" fxLayoutAlign="start center"><mat-icon color="primary" aria-hidden="true">update</mat-icon>{{comment.modified | date: 'dd/MM/yyyy' }}</span>
+        </p>
+    </mat-list-item>
+  </mat-list>
+</div>

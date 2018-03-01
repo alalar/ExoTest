@@ -1,0 +1,25 @@
+{
+    "Users" : "Usuarios",
+    "User": "Usuario",
+    "N" : "Nuevo",
+    "V" : "Verificado",
+    "M" : "Hombre",
+    "F" : "Mujer",    
+    "W" : "Mujer",
+    "Rating" : "Valoracion",
+    "Created" : "Creado",
+    "Modified" : "Modificado",
+    "D" : "Desactivado",
+    "A" : "Activado",
+    "P" : "Pendiente",
+    "LocationNotFound" : "No se ha encontrado la localizacion",
+    "Comments" : "COMENTARIOS",
+    "Subject" : "Titulo",
+    "Comment" : "Comentario",
+    "NewComment" : "Nuevo Comentario",
+    "isMandatory" : " es obligatorio",
+    "MinLengthValidation" : "Debe tener al menos {{minValue}} caracteres",
+    "ErrorSavingComment" : "Se ha producido un error en el servidor, intentenlo otra vez",
+    "SelectOtherUser" : "Ver otro usuario"
+   
+}

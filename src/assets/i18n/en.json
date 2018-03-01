@@ -1,0 +1,25 @@
+{
+    "Users": "Users",
+    "User": "User",
+    "N" : "New",
+    "V" : "Verified",
+    "M" : "Male",
+    "F" : "Female",
+    "W" : "Female",
+    "Rating" : "Rating",
+    "Created" : "Created",
+    "Modified" : "Modified",
+    "D" : "Deactivated",
+    "A" : "Activated",
+    "P" : "Pending",
+    "LocationNotFound" : "No location was found",
+    "Comments" : "COMMENTS",
+    "Subject" : "Subject",
+    "Comment" : "Comment",
+    "NewComment" : "New Comment",
+    "isMandatory" : " is mandatory",
+    "MinLengthValidation" : "It must have at least {{minValue}} chars",
+    "ErrorSavingComment" : "Error in the server saving the comment, try it later",
+    "SelectOtherUser" : "Choose another user"
+
+}

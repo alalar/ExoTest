@@ -1,0 +1,58 @@
+<mat-accordion>
+  <mat-expansion-panel #panelAddComment (opened)="panelOpenState = true"
+                          (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+          <button mat-raised-button color="primary">{{panelOpenState ? 'close comment form' : 'add a comment' }}</button>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <mat-card fxFlex="50%" fxFlex.lt-lg="100%">
+        <mat-card-header>
+            <mat-card-title>
+                <h3>{{'NewComment'|translate}}</h3>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form fxLayout="column" [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+            <mat-form-field >
+              <input matInput placeholder="{{'User'|translate}}" value="" required formControlName="user">
+              <mat-error *ngIf="commentForm.controls.user.hasError('required')">
+                {{'User'|translate}} {{'isMandatory'|translate}}
+              </mat-error>
+              <mat-error *ngIf="commentForm.controls.user.hasError('minlength')">
+                  {{'MinLengthValidation'|translate:{'minValue': '3'} }}
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput placeholder="{{'Subject'|translate}}" value="" required formControlName="subject">
+                <mat-error *ngIf="commentForm.controls.subject.hasError('required')">
+                  {{'Subject'|translate}} {{'isMandatory'|translate}}
+                </mat-error>
+                <mat-error *ngIf="commentForm.controls.subject.hasError('minlength')">
+                    {{'MinLengthValidation'|translate:{'minValue': '5'} }}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field >
+                <textarea matInput placeholder="{{'Comment'|translate}}" value="" required formControlName="body" rows="3">
+                </textarea>
+                <mat-error *ngIf="commentForm.controls.body.hasError('required')">
+                  {{'Comment'|translate}} {{'isMandatory'|translate}}
+                </mat-error>
+                <mat-error *ngIf="commentForm.controls.body.hasError('minlength')">
+                    {{'MinLengthValidation'|translate:{'minValue': '10'} }}
+                </mat-error>
+            </mat-form-field>
+            <input type="hidden" value="consultant.id" formControlName="consultant" >
+            <label>{{'Rating' | translate}} {{ matslider.value }}</label>
+            <mat-slider min="0" max="10" step="1" value="0" #matslider formControlName="rating"></mat-slider>
+            <mat-error *ngIf="errorSavingComment.length>0">
+                {{errorSavingComment}}
+            </mat-error>
+            <button mat-raised-button color="primary" type="submit">Add</button>
+          </form> 
+        </mat-card-content>
+      </mat-card>  
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
